@@ -1,52 +1,59 @@
 <?php
+
+
+// Connect to the database
 require_once("header.php");
 require_once("navigation.php");
-?>
 
+?>
 <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/bootstrap.min.js"></script>
-
 <?php
-if(isset($_GET['id'])) {
+// Connect to the database
+$db = new mysqli("localhost", "root", "", "project");
+
+// Check if ID is set and fetch election data
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
+
+    // Prepare the query
+    $query = "SELECT * FROM candidate_details WHERE id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch data and populate the form
+    if ($row = $result->fetch_assoc()) {
+        $election_topic = $row['election_topic'];
+        $candidate_name = $row['candidate_name'];
+        $Registration_No = $row['Registration_No'];
+        $candidate_details = $row['candidate_details'];
+        $candidate_photo = $row['candidate_photo'];
+        
+    }
+    // Close the statement
+    $stmt->close();
+} else {
+    
+    // Redirect if ID is not set
+    header("Location: /project/admin/adminhome.php?addElectionPage=1");
+    exit;
 }
 ?>
 
+
+<!-- Form to edit election -->
 <div class="row my-3 p-4">
     <div class="col-md-6">
-        <h3>Edit Candidates</h3>
-
-        <?php
-        if(isset($_GET['added'])) {
-        ?>
-        <div class="alert alert-success my-3" role="alert">
-            Candidate has been added successfully.
-        </div>
-        <?php 
-        } else if(isset($_GET['largeFile'])) {
-        ?>
-        <div class="alert alert-danger my-3" role="alert">
-            Candidate image is too large, please upload a smaller file (you can upload any image up to 2MB).
-        </div>
-        <?php
-        } else if(isset($_GET['invalidFile'])) {
-        ?>
-        <div class="alert alert-danger my-3" role="alert">
-            Invalid image type (Only .jpg, .png files are allowed).
-        </div>
-        <?php
-        } else if(isset($_GET['failed'])) {
-        ?>
-        <div class="alert alert-danger my-3" role="alert">
-            Image uploading failed, please try again.
-        </div>
-        <?php
-        }
-        ?>
-
-        <form method="POST" enctype="multipart/form-data">
+        <h3>Edit // -> <a href=""> <?php echo $election_topic; ?></a> </h3>
+        <form method="POST">
+            <div>
+                <input type="text" name="election_topic" placeholder="Election Topic" class="form-control"
+                    value="<?php echo $election_topic; ?>" required readonly /><br>
+            </div>
             <div class="form-group">
                 <select class="form-control" name="election_topic" required>
                     <option value="">Select Election</option>
@@ -68,64 +75,65 @@ if(isset($_GET['id'])) {
                 </select>
             </div>
 
-            <div class="form-group">
-                <input type="text" name="candidate_name" placeholder="Candidate Name" class="form-control" required />
+
+
+
+
+
+
+            <div>
+                <input type="text" name="candidate_name" placeholder="No of Candidates" class="form-control"
+                    value="<?php echo $candidate_name; ?>" required /><br>
             </div>
-            <div class="form-group">
-                <input type="file" name="candidate_photo" class="form-control" required />
+            <div>
+                <input type="text" name="Registration_No" placeholder="Starting Date" class="form-control"
+                    value="<?php echo $Registration_No; ?>" required /><br>
             </div>
-            <div class="form-group">
-                <input type="text" name="Registration_No" placeholder="Registration No" class="form-control" required />
-            </div>
-            <div class="form-group">
-                <input type="text" name="candidate_details" placeholder="Candidate Details" class="form-control"
-                    required />
+            <div>
+                <input type="text" name="candidate_details" placeholder="Ending Date" class="form-control"
+                    value="<?php echo $candidate_details; ?>" required /><br>
             </div>
 
             <div class="d-flex">
-                <input type="submit" value="Back" name="editCandidateBtn" class="btn btn-danger mr-5" />
-                <input type="submit" value="Edit Candidate" name="editCandidateBtn" class="btn btn-success" />
+
+                <input type="submit" value="Update Election" name="updatecandidatebtn" class="btn btn-success " />
             </div>
+
+
         </form>
     </div>
-
-    <?php
-    $db = mysqli_connect("localhost", "root", "", "project") or die("Connectivity Failed");
-
-    if(isset($_POST['editCandidateBtn'])) {
-        $candidate_name = $_POST['candidate_name'];
-        $Registration_No = $_POST['Registration_No'];
-        $candidate_details = $_POST['candidate_details'];
-        $election_topic = $_POST['election_topic'];
-        $inserted_on = date("Y-m-d");
-        $targeted_folder = "../assets/images/candidate_photos/"; 
-        $candidate_photo = $targeted_folder . $_FILES['candidate_photo']['name'];
-        $candidate_photo_tmp_name = $_FILES['candidate_photo']['name'];
-        $candidate_photo_type = strtolower(pathinfo($candidate_photo, PATHINFO_EXTENSION));
-        $allowed_types = array("jpg", "png", "jpeg");
-        $image_size = $_FILES['candidate_photo']['size'];
-
-        $query = "SELECT * FROM candidate_details";
-        $result = mysqli_query($db, $query);
-        $alreadyp = "notpresent";
-
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                if($_POST['Registration_No'] == $row['Registration_No']) {
-                    $alreadyp = "present";
-                }
-            }
-
-            if($alreadyp == "present") {
-                echo "";
-            } else {
-                $result = mysqli_query($db, "UPDATE `candidate_details` SET `election_topic`='$election_topic',`candidate_name`='$candidate_name',`Registration_No`='$Registration_No',`candidate_details`='$candidate_details',`candidate_photo`='$candidate_photo' WHERE id='$id'");
-
-                if($result > 0) {
-                    header('Location: /project/admin/adminhome.php?addCandidatePage=1'); 
-                }
-            }
-        }
-    }
-    ?>
 </div>
+
+<?php
+// Handle form submission
+if (isset($_POST['updatecandidatebtn'])) {
+   
+    $election_topic = $row['election_topic'];
+        $candidate_name = $row['candidate_name'];
+        $Registration_No = $row['Registration_No'];
+        $candidate_details = $row['candidate_details'];
+        $candidate_photo = $row['candidate_photo'];
+
+   
+
+    // Prepare the update query
+    $update_query = "UPDATE candidate_details SET election_topic = ?, Registration_No = ?, candidate_details = ?  WHERE id = ?";
+    $stmt = $db->prepare($update_query);
+    $stmt->bind_param("sissi", $election_topic, $Registration_No, $candidate_details, $id);
+
+    // Execute the update query
+    if ($stmt->execute()) {
+        // Redirect after successful update
+        header('Location: /project/admin/adminhome.php?addElectionPage=1');
+        exit;
+    } else {
+        echo "Error updating record: " . $stmt->error;
+    }
+    
+    // Close the statement
+    $stmt->close();
+}
+
+// Close the database connection
+$db->close();
+?>
