@@ -8,37 +8,23 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
 </head>
 
 <body>
-    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
         <div class="container-fluid">
             <div class="d-flex justify-content-between w-100">
-                <div class="col"></div>
+
                 <div class="col d-flex justify-content-center">
-                    <a class="navbar-brand " href="home.php">Online Voting System</a>
+                    <a class="navbar-brand " href="home.php">
+                        <h3>Online Voting System </h3>
+                    </a>
                 </div>
-                <div class="col d-flex justify-content-end">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
+
             </div>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about1.php">About <span class="badge text-bg-primary">Info</span></a>
-                    </li>
-                </ul>
-                </li>
-                </ul>
-            </div>
+
         </div>
     </nav>
 
@@ -54,11 +40,17 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="img/photo2.jpg" width="1400" height="686" class="d-block w-100" alt="..." />
+                <img src="img/fontview.jpg" width="1400" height="686" class="d-block w-100" alt="..." />
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>We are here</h5>
-                    <p>
-                        To provide you this website development for Online Voting System
+                    <h5 style="color: black;">We are here</h5>
+                    <p style="color: black;">
+                        To provide you this website development for Online Voting System,Welcome to our Online Voting
+                        Platform, the premier destination for secure, transparent, and accessible
+                        online voting. Our platform offers a seamless and straightforward voting process for a wide
+                        range of
+                        elections, from local community polls to organizational elections. With cutting-edge security
+                        and
+                        user-friendly design, participating in democracy has never been easier.
                     </p>
                     <div class="mx-2">
                         <a href="index.php"> <button type="button" class="btn btn-danger">Login</button></a>
@@ -70,10 +62,10 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/online.jpg" width="1400" height="686" class="d-block w-100" alt="..." />
+                <img src="img/phh.jpg" width="1400" height="686" class="d-block w-100" alt="..." />
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color: black;">Acknowledge</h5>
-                    <p style="color: black;">You can vote from anywhere you are, and there is less chance of any error .
+                    <h5 style="color: white;">Acknowledge</h5>
+                    <p style="color: white;">You can vote from anywhere you are, and there is less chance of any error .
                     </p>
                     <div class="mx-2">
                         <a href="index.php"> <button type="button" class="btn btn-primary">Login</button></a>
@@ -112,14 +104,6 @@
     </div>
 
 
-    <div class="container my-4">
-        <footer class="container">
-            <p>
-                © 2020–2024 Company, <span> Online Voting System </span> <a href="#">Privacy</a> ·
-                <a href="#">Terms</a>
-            </p>
-        </footer>
-    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

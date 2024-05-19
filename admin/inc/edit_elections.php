@@ -1,5 +1,6 @@
 <?php
 
+
 // Connect to the database
 require_once("header.php");
 require_once("navigation.php");
@@ -34,6 +35,7 @@ if (isset($_GET['id'])) {
     // Close the statement
     $stmt->close();
 } else {
+    
     // Redirect if ID is not set
     header("Location: /project/admin/adminhome.php?addElectionPage=1");
     exit;

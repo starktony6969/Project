@@ -32,10 +32,16 @@
     function validateContact() {
         var contactInput = document.getElementById("Contact");
         var contactError = document.getElementById("contactError");
+
+        // Remove non-digit characters
         contactInput.value = contactInput.value.replace(/\D/g, '');
+
+        // Trim to 10 digits if necessary
         if (contactInput.value.length > 10) {
             contactInput.value = contactInput.value.substring(0, 10);
         }
+
+        // Validate the contact number
         if (!/^(98|97)\d{8}$/.test(contactInput.value)) {
             contactError.textContent =
                 "Please enter a valid Contact Number. It should start with 98 or 97 followed by 8 digits.";
@@ -46,10 +52,15 @@
         }
     }
 
+    // Add an event listener to call validateContact on input
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("Contact").addEventListener("input", validateContact);
+    });
+
     function validateRegistration() {
         var RegistrationInput = document.getElementById("Registration").value;
         var RegistrationError = document.getElementById("RegistrationError");
-        var validRegistrationPattern = /^\d[A-Z]-\d{2}-\d{4}$/;
+        var validRegistrationPattern = /^\d[A]-\d{2}-\d{4}$/;
         if (!validRegistrationPattern.test(RegistrationInput)) {
             RegistrationError.textContent = "Please enter a valid Registration number in the format XA-XX-XXXX.";
             document.getElementById("Password").disabled = true;
