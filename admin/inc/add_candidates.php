@@ -132,6 +132,10 @@ if(isset($_GET['added'])) {
 
     <div class="col-8">
         <h3>Candidate Details</h3>
+        <div class="row bg-black text-center text-white">
+            <div class="col-12 my-3">
+            </div>
+        </div>
         <table class="table">
             <thead>
                 <tr>

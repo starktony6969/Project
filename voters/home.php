@@ -39,7 +39,7 @@ if (!isset($_SESSION['user_id'])) {
         <table class="table">
             <thead>
                 <tr>
-                    <th colspan="4" class="bg-green text-white">
+                    <th colspan="5" class="bg-green text-white">
                         <h5> ELECTION TOPIC: <?php echo strtoupper($election_name); ?></h5>
                     </th>
                 </tr>

@@ -56,12 +56,16 @@ if (isset($_GET['id'])) {
                     value="<?php echo $number_of_candidates; ?>" required /><br>
             </div>
             <div>
-                <input type="date" name="starting_date" placeholder="Starting Date" class="form-control"
-                    value="<?php echo $starting_date; ?>" required /><br>
+                <label for="starting_date">Starting Date</label>
+                <input type="date" name="starting_date" id="starting_date" value="<?php echo $starting_date; ?>"
+                    class="form-control" />
+                <span class="text-danger"><?php echo isset($starting_date_err) ? $starting_date_err : ''; ?></span><br>
             </div>
             <div>
-                <input type="date" name="ending_date" placeholder="Ending Date" class="form-control"
-                    value="<?php echo $ending_date; ?>" required /><br>
+                <label for="starting_date">Ending Date</label>
+                <input type="date" name="ending_date" id="ending_date" placeholder="Ending Date" class="form-control"
+                    value="<?php echo $ending_date; ?>" required />
+                <span class="text-danger"><?php echo isset($ending_date_err) ? $ending_date_err : ''; ?></span><br>
             </div>
 
             <div class="d-flex">
@@ -76,6 +80,16 @@ if (isset($_GET['id'])) {
 </div>
 
 <?php
+            // Validate Starting Date
+            if (empty($_POST["starting_date"])) {
+                $starting_date_err = "Starting date is required";
+            }
+
+            // Validate Ending Date
+            if (empty($_POST["ending_date"])) {
+                $ending_date_err = "Ending date is required";
+            }
+
 // Handle form submission
 if (isset($_POST['updateElectionBtn'])) {
     $election_topic = $_POST['election_topic'];
@@ -84,6 +98,20 @@ if (isset($_POST['updateElectionBtn'])) {
     $ending_date = $_POST['ending_date'];
     $inserted_on = date("Y-m-d");
 
+
+        // Create date objects
+        $date1 = date_create($inserted_on);
+        $date2 = date_create($starting_date);
+        $date3 = date_create($ending_date);
+
+        // Calculate difference
+        $diff = date_diff($date1, $date2);
+
+        // Check if the starting date is in the past
+        if ($starting_date < $inserted_on) {
+            echo "Error: please fill the details.";
+            exit;
+        }
 
     // Calculate the status based on dates
     $status = '';
@@ -116,3 +144,17 @@ if (isset($_POST['updateElectionBtn'])) {
 // Close the database connection
 $db->close();
 ?>
+
+
+<script>
+// Get current date
+var today = new Date().toISOString().split('T')[0];
+// Set minimum date for starting_date input
+document.getElementById('starting_date').min = today;
+// Set minimum date for ending_date input
+document.getElementById('ending_date').min = today;
+
+function confirmDelete() {
+    return confirm('Are you sure you want to delete?');
+}
+</script>

@@ -1,6 +1,11 @@
 <div class="row my-3">
     <div class="col-12">
         <h3>Elections</h3>
+        <div class="row bg-black text-center text-white">
+            <div class="col-12 my-3">
+            </div>
+        </div>
+
         <table class="table">
             <thead>
                 <tr>

@@ -1,9 +1,8 @@
-<div class="row bg-black text-center text-white">
-    <div class="col-12 my-3">
+<footer class="py-3 my-4">
 
+    <p class="text-center text-body-secondary">© 2024 Online Voting System, All rights reserve</p>
+</footer>
 
-    </div>
-</div>
 
 
 <script src="../assets/js/jquery.min.js"></script>

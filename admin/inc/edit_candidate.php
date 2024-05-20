@@ -1,6 +1,7 @@
 <?php
 
-
+require_once("header.php");
+require_once("navigation.php");
     $db = new mysqli("localhost", "root", "", "project");
 
 // Check if ID is set and fetch election data

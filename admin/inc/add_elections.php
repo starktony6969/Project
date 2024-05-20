@@ -109,6 +109,11 @@
 
     <div class="col-8">
         <h3>Upcoming Elections</h3>
+        <div class="row bg-black text-center text-white">
+            <div class="col-12 my-3">
+            </div>
+        </div>
+
         <table class="table">
             <thead>
                 <tr>
@@ -121,9 +126,9 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody>
 
-                <?php
+
+            <?php
                 include 'config.php';
                 $query = "SELECT * FROM elections";
                 $result = mysqli_query($db, $query);
@@ -146,22 +151,7 @@
                     echo "<tr><td colspan='7'>No upcoming elections found.</td></tr>";
                 }
                 ?>
-
-                <style>
-                label {
-                    font-weight: 500;
-                }
-                </style>
-
-                <script>
-                // Get current date
-                var today = new Date().toISOString().split('T')[0];
-                // Set minimum date for starting_date input
-                document.getElementById('starting_date').min = today;
-                // Set minimum date for ending_date input
-                document.getElementById('ending_date').min = today;
-
-                function confirmDelete() {
-                    return confirm('Are you sure you want to delete?');
-                }
-                </script>
+            </tbody>
+        </table>
+    </div>
+</div>
