@@ -22,7 +22,7 @@ if(isset($_GET['added'])) {
 } else if(isset($_GET['failed'])) {
 ?>
 <div class="alert alert-danger my-3" role="alert">
-    Image uploading failed, please try again.
+    same registration.no can't be added.
 </div>
 <?php
 }

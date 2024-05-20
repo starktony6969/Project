@@ -8,7 +8,87 @@
     <link rel="stylesheet" href="style/style.css">
     <title>Register</title>
 
+    <link rel="stylesheet" href="style/register.css">
+</head>
 
+<body>
+    <div class="container">
+        <div class="box form-box">
+            <?php
+                include("admin/inc/config.php"); 
+                $message = ''; 
+
+                if (isset($_POST['submit'])) {
+                    $Name = $_POST['Name'];
+                    $Contact = $_POST['Contact'];
+                    $Registration_No = $_POST['Registration_No']; // Ensure this matches your HTML form and database column
+                    $Password = $_POST['Password'];
+                    $retypepassword = $_POST['retypepassword'];
+
+                    if ($Password === $retypepassword) {
+                        // SQL to prevent SQL Injection
+                        $stmt = $db->prepare("INSERT INTO users(Name, Contact, Registration_No, Password) VALUES(?, ?, ?, ?)");
+                        $stmt->bind_param("ssss", $Name, $Contact, $Registration_No, $Password);
+                        $stmt->execute();
+
+                        $message = "Registration successful!";
+                    } else {
+                        $message = "Passwords do not match.";
+                    }
+                }
+            ?>
+
+
+            <div class="form-box">
+                <h3>Register</h3>
+
+                <form action="" method="post" name="registrationForm">
+                    <div class="field input">
+                        <label for="Name">Name</label>
+                        <input type="text" name="Name" id="Name" autocomplete="off" required onkeyup="validateName()">
+                        <p id="nameError" style="color: red;"></p>
+                    </div>
+
+                    <div class="field input">
+                        <label for="Contact">Contact</label>
+                        <input type="text" name="Contact" id="Contact" autocomplete="off" required
+                            onkeyup="validateContact()" disabled>
+                        <p id="contactError" style="color: red;"></p>
+                    </div>
+
+                    <div class="field input">
+                        <label for="Registration">Registration No</label>
+                        <input type="text" name="Registration_No" id="Registration" autocomplete="off" required
+                            onkeyup="validateRegistration()" disabled>
+                        <p id="RegistrationError" style="color: red;"></p>
+                    </div>
+
+                    <div class="field input">
+                        <label for="Password">Password</label>
+                        <input type="password" name="Password" id="Password" autocomplete="off" required
+                            onkeyup="validatePassword()" disabled>
+                        <p id="passwordError" style="color: red;"></p>
+                    </div>
+
+                    <div class="field input">
+                        <label for="retypepassword">Retype Password</label>
+                        <input type="password" name="retypepassword" id="retypepassword" autocomplete="off" required
+                            disabled>
+                    </div>
+
+                    <div class="field">
+                        <input type="submit" class="btn" name="submit" value="Register">
+                    </div>
+                    <?php if (!empty($message)): ?>
+                    <p style="color: red;"><?php echo $message; ?></p>
+                    <?php endif; ?>
+                    <div class="links">
+                        Already registered? <a href="index.php">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script>
     function validateName() {
@@ -80,81 +160,6 @@
         }
     }
     </script>
-</head>
-
-<body>
-    <div class="container">
-        <div class="box form-box">
-            <?php
-                include("admin/inc/config.php"); 
-                $message = ''; 
-
-                if (isset($_POST['submit'])) {
-                    $Name = $_POST['Name'];
-                    $Contact = $_POST['Contact'];
-                    $Registration_No = $_POST['Registration_No']; // Ensure this matches your HTML form and database column
-                    $Password = $_POST['Password'];
-                    $retypepassword = $_POST['retypepassword'];
-
-                    if ($Password === $retypepassword) {
-                        // SQL to prevent SQL Injection
-                        $stmt = $db->prepare("INSERT INTO users(Name, Contact, Registration_No, Password) VALUES(?, ?, ?, ?)");
-                        $stmt->bind_param("ssss", $Name, $Contact, $Registration_No, $Password);
-                        $stmt->execute();
-
-                        $message = "Registration successful!";
-                    } else {
-                        $message = "Passwords do not match.";
-                    }
-                }
-            ?>
-            <header>Register</header>
-            <form action="" method="post" name="registrationForm">
-                <div class="field input">
-                    <label for="Name">Name</label>
-                    <input type="text" name="Name" id="Name" autocomplete="off" required onkeyup="validateName()">
-                    <p id="nameError" style="color: red;"></p>
-                </div>
-
-                <div class="field input">
-                    <label for="Contact">Contact</label>
-                    <input type="text" name="Contact" id="Contact" autocomplete="off" required
-                        onkeyup="validateContact()" disabled>
-                    <p id="contactError" style="color: red;"></p>
-                </div>
-
-                <div class="field input">
-                    <label for="Registration">Registration No</label>
-                    <input type="text" name="Registration_No" id="Registration" autocomplete="off" required
-                        onkeyup="validateRegistration()" disabled>
-                    <p id="RegistrationError" style="color: red;"></p>
-                </div>
-
-                <div class="field input">
-                    <label for="Password">Password</label>
-                    <input type="password" name="Password" id="Password" autocomplete="off" required
-                        onkeyup="validatePassword()" disabled>
-                    <p id="passwordError" style="color: red;"></p>
-                </div>
-
-                <div class="field input">
-                    <label for="retypepassword">Retype Password</label>
-                    <input type="password" name="retypepassword" id="retypepassword" autocomplete="off" required
-                        disabled>
-                </div>
-
-                <div class="field">
-                    <input type="submit" class="btn" name="submit" value="Register">
-                </div>
-                <?php if (!empty($message)): ?>
-                <p style="color: red;"><?php echo $message; ?></p>
-                <?php endif; ?>
-                <div class="links">
-                    Already registered? <a href="index.php">Login</a>
-                </div>
-            </form>
-        </div>
-    </div>
 </body>
 
 </html>

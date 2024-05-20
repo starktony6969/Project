@@ -111,7 +111,7 @@ if (isset($_GET['id'])) {
             </div>
             <input type="button" value="Back" class="btn btn-danger mr-5" onclick="history.back()" />
 
-            <input type="submit" value="Add Candidate" name="editCandidateBtn" class="btn btn-success" />
+            <input type="submit" value="Update Candidate" name="editCandidateBtn" class="btn btn-success" />
         </form>
     </div>
 
@@ -142,19 +142,22 @@ if (isset($_GET['id'])) {
         {
             // $alreadyp="notpresent";
         //  echo $row['Registration_No'];
-          if($_POST['Registration_No'] == $row['Registration_No'])
-            {
-                // echo $row['Registration_No'];
-            $alreadyp = "present";
-            // echo $alreadyp;
-            }
-        }
-        if($alreadyp=="present")
-        {
-            echo "";
-        }
-        else{
-            $result=mysqli_query($db, "UPDATE `candidate_details` SET `election_topic`='$election_topic',`candidate_name`='$candidate_name',`Registration_No`='$Registration_No',`candidate_details`='$candidate_details',`candidate_photo`='$candidate_photo' WHERE id='$id'");
+        //   if($_POST['Registration_No'] == $row['Registration_No'])
+        //     {
+        //         // echo $row['Registration_No'];
+        //     $alreadyp = "present";
+        //     // echo $alreadyp;
+        //     }
+        //     else{
+        //         $alreadyp="";
+        //     }
+        // }
+        // if($alreadyp=="present")
+        // {
+        //     echo "present";
+        // }
+        // else{
+            $result=mysqli_query($db, "UPDATE candidate_details SET `election_topic`='$election_topic',`candidate_name`='$candidate_name',`Registration_No`='$Registration_No',`candidate_details`='$candidate_details',`candidate_photo`='$candidate_photo' WHERE id='$id'");
 
             if($result>0)
             {
