@@ -84,6 +84,7 @@ if (isset($_POST['updateElectionBtn'])) {
     $ending_date = $_POST['ending_date'];
     $inserted_on = date("Y-m-d");
 
+
     // Calculate the status based on dates
     $status = '';
     if ($inserted_on < $starting_date) {

@@ -62,8 +62,8 @@ if (isset($_GET['id'])) {
     }
 
 ?>
-<div class="row my-3">
-    <div class="col-4">
+<div class="row my-3 p-4">
+    <div class="col-md-6">
         <h3>Edit Candidates</h3>
 
         <form method="POST" enctype="multipart/form-data">
@@ -108,6 +108,8 @@ if (isset($_GET['id'])) {
                 <input type="text" name="candidate_details" placeholder="Candidate Details" class="form-control"
                     value="<?php echo $candidate_details; ?>" required />
             </div>
+            <input type="button" value="Back" class="btn btn-danger mr-5" onclick="history.back()" />
+
             <input type="submit" value="Add Candidate" name="editCandidateBtn" class="btn btn-success" />
         </form>
     </div>
