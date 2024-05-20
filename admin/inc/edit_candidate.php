@@ -1,11 +1,36 @@
 <?php
 
 
-    if(isset($_GET['id']))
-    {
-        $id = $_GET['id'];
+    $db = new mysqli("localhost", "root", "", "project");
+
+// Check if ID is set and fetch election data
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Prepare the query
+    $query = "SELECT * FROM candidate_details WHERE id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch data and populate the form
+    if ($row = $result->fetch_assoc()) {
+        $election_topic = $row['election_topic'];
+        $candidate_name = $row['candidate_name'];
+        $Registration_No = $row['Registration_No'];
+        $candidate_details = $row['candidate_details'];
     }
+    // Close the statement
+    $stmt->close();
+}
 ?>
+
+<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+
 <?php 
     if(isset($_GET['added']))
     {
@@ -69,17 +94,19 @@
             </div>
 
             <div class="form-group">
-                <input type="text" name="candidate_name" placeholder="Candidate Name" class="form-control" required />
+                <input type="text" name="candidate_name" placeholder="Candidate Name" class="form-control"
+                    value="<?php echo $candidate_name; ?>" required />
             </div>
             <div class="form-group">
                 <input type="file" name="candidate_photo" class="form-control" required />
             </div>
             <div class="form-group">
-                <input type="text" name="Registration_No" placeholder="Registration_No" class="form-control" required />
+                <input type="text" name="Registration_No" placeholder="Registration_No" class="form-control"
+                    value="<?php echo $Registration_No; ?>" required />
             </div>
             <div class="form-group">
                 <input type="text" name="candidate_details" placeholder="Candidate Details" class="form-control"
-                    required />
+                    value="<?php echo $candidate_details; ?>" required />
             </div>
             <input type="submit" value="Add Candidate" name="editCandidateBtn" class="btn btn-success" />
         </form>

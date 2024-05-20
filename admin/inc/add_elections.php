@@ -14,7 +14,7 @@
             // Validate Number of Candidates
             if (empty($_POST["number_of_candidates"])) {
                 $number_of_candidates_err = "Number of candidates is required";
-            } else {
+            } else { 
                 $number_of_candidates = test_input($_POST["number_of_candidates"]);
             }
 
