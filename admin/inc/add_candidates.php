@@ -1,28 +1,49 @@
+<style>
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+</style>
+
 <?php 
 error_reporting(0);
  
 if(isset($_GET['added'])) {
 ?>
 <div class="alert alert-success my-3" role="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     Candidate has been added successfully.
 </div>
 <?php 
 } else if(isset($_GET['largeFile'])) {
 ?>
 <div class="alert alert-danger my-3" role="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     Candidate image is too large, please upload a smaller file (you can upload any image up to 2MB).
 </div>
 <?php
 } else if(isset($_GET['invalidFile'])) {
 ?>
 <div class="alert alert-danger my-3" role="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     Invalid image type (Only .jpg, .png files are allowed).
 </div>
 <?php
 } else if(isset($_GET['failed'])) {
 ?>
 <div class="alert alert-danger my-3" role="alert">
-    same registration.no can't be added.
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    Same registration.no can't be added.
 </div>
 <?php
 }
