@@ -36,7 +36,7 @@ if(isset($_GET['added'])) {
 ?>
 <div class="alert alert-danger my-3" role="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    Invalid image type (Only .jpg, .png files are allowed).
+    Invalid image type (only .jpg, .png, .jpeg files are allowed).
 </div>
 <?php
 } else if(isset($_GET['failed'])) {
