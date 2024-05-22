@@ -4,25 +4,22 @@ require_once("header.php");
 require_once("navigation.php");
     $db = new mysqli("localhost", "root", "", "project");
 
-// Check if ID is set and fetch election data
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Prepare the query
     $query = "SELECT * FROM candidate_details WHERE id = ?";
     $stmt = $db->prepare($query);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Fetch data and populate the form
     if ($row = $result->fetch_assoc()) {
         $election_topic = $row['election_topic'];
         $candidate_name = $row['candidate_name'];
         $Registration_No = $row['Registration_No'];
         $candidate_details = $row['candidate_details'];
     }
-    // Close the statement
+   
     $stmt->close();
 }
 ?>
@@ -140,23 +137,7 @@ if (isset($_GET['id'])) {
         $sno = 1;
         while ($row = mysqli_fetch_assoc($result)) 
         {
-            // $alreadyp="notpresent";
-        //  echo $row['Registration_No'];
-        //   if($_POST['Registration_No'] == $row['Registration_No'])
-        //     {
-        //         // echo $row['Registration_No'];
-        //     $alreadyp = "present";
-        //     // echo $alreadyp;
-        //     }
-        //     else{
-        //         $alreadyp="";
-        //     }
-        // }
-        // if($alreadyp=="present")
-        // {
-        //     echo "present";
-        // }
-        // else{
+        
             $result=mysqli_query($db, "UPDATE candidate_details SET `election_topic`='$election_topic',`candidate_name`='$candidate_name',`Registration_No`='$Registration_No',`candidate_details`='$candidate_details',`candidate_photo`='$candidate_photo' WHERE id='$id'");
 
             if($result>0)

@@ -1,7 +1,6 @@
 <?php
 
 
-// Connect to the database
 require_once("header.php");
 require_once("navigation.php");
 
@@ -11,38 +10,36 @@ require_once("navigation.php");
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/bootstrap.min.js"></script>
 <?php
-// Connect to the database
+
 $db = new mysqli("localhost", "root", "", "project");
 
-// Check if ID is set and fetch election data
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Prepare the query
+   
     $query = "SELECT * FROM elections WHERE id = ?";
     $stmt = $db->prepare($query);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Fetch data and populate the form
     if ($row = $result->fetch_assoc()) {
         $election_topic = $row['election_topic'];
         $number_of_candidates = $row['no_of_candidates'];
         $starting_date = $row['starting_date'];
         $ending_date = $row['ending_date'];
     }
-    // Close the statement
+ 
     $stmt->close();
 } else {
     
-    // Redirect if ID is not set
+    
     header("Location: /project/admin/adminhome.php?addElectionPage=1");
     exit;
 }
 ?>
 
-<!-- Form to edit election -->
 <div class="row my-3 p-4">
     <div class="col-md-6">
         <h3>Edit // -> <a href=""> <?php echo $election_topic; ?></a> </h3>
@@ -80,17 +77,16 @@ if (isset($_GET['id'])) {
 </div>
 
 <?php
-            // Validate Starting Date
+          
             if (empty($_POST["starting_date"])) {
                 $starting_date_err = "Starting date is required";
             }
 
-            // Validate Ending Date
             if (empty($_POST["ending_date"])) {
                 $ending_date_err = "Ending date is required";
             }
 
-// Handle form submission
+
 if (isset($_POST['updateElectionBtn'])) {
     $election_topic = $_POST['election_topic'];
     $number_of_candidates = $_POST['number_of_candidates'];
@@ -99,21 +95,20 @@ if (isset($_POST['updateElectionBtn'])) {
     $inserted_on = date("Y-m-d");
 
 
-        // Create date objects
+     
         $date1 = date_create($inserted_on);
         $date2 = date_create($starting_date);
         $date3 = date_create($ending_date);
 
-        // Calculate difference
         $diff = date_diff($date1, $date2);
 
-        // Check if the starting date is in the past
+        
         if ($starting_date < $inserted_on) {
             echo "Error: please fill the details.";
             exit;
         }
 
-    // Calculate the status based on dates
+    
     $status = '';
     if ($inserted_on < $starting_date) {
         $status = "Coming";
@@ -128,9 +123,9 @@ if (isset($_POST['updateElectionBtn'])) {
     $stmt = $db->prepare($update_query);
     $stmt->bind_param("sissssi", $election_topic, $number_of_candidates, $starting_date, $ending_date, $status, $inserted_on, $id);
 
-    // Execute the update query
+    // Execute the update query..
     if ($stmt->execute()) {
-        // Redirect after successful update
+        // Redirect after successful update..
         header('Location: /project/admin/adminhome.php?addElectionPage=1');
         exit;
     } else {
@@ -141,17 +136,16 @@ if (isset($_POST['updateElectionBtn'])) {
     $stmt->close();
 }
 
-// Close the database connection
+// Close the database connection.
 $db->close();
 ?>
 
 
 <script>
-// Get current date
 var today = new Date().toISOString().split('T')[0];
-// Set minimum date for starting_date input
+
 document.getElementById('starting_date').min = today;
-// Set minimum date for ending_date input
+
 document.getElementById('ending_date').min = today;
 
 function confirmDelete() {

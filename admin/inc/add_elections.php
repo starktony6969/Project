@@ -155,3 +155,15 @@
         </table>
     </div>
 </div>
+<script>
+// Get current date
+var today = new Date().toISOString().split('T')[0];
+// Set minimum date for starting_date input
+document.getElementById('starting_date').min = today;
+// Set minimum date for ending_date input
+document.getElementById('ending_date').min = today;
+
+function confirmDelete() {
+    return confirm('Are you sure you want to delete?');
+}
+</script>
