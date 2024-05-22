@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style/style.css">
     <style>
     .img {
@@ -87,6 +88,15 @@
     .links a:hover {
         text-decoration: underline;
     }
+
+    .fa {
+        font-size: 35px;
+        color: #006e6e;
+    }
+
+    .fa:hover {
+        color: #007bff;
+    }
     </style>
 
 </head>
@@ -129,6 +139,9 @@
 
                 <div class="form-box">
                     <form action="" method="post">
+                        <div id=icon>
+                            <a href="home.php"> <i class="fa fa-home"></i></a>
+                        </div>
                         <h3>Login</h3>
                         <div class="field input">
                             <label for="Name">Name</label>
