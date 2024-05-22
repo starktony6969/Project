@@ -12,9 +12,6 @@
                         <a class="nav-link text-white mr-3" href="home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white mr-3" href="profile.php">Profile</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-white mr-3" href="../admin/logout.php">Logout</a>
                     </li>
                 </ul>
