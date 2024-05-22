@@ -5,10 +5,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/style.css">
     <title>Register</title>
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+    .form-box {
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-    <link rel="stylesheet" href="style/register.css">
+    .form-box h3 {
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #006e6e;
+        color: white;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: rgb(221, 228, 221);
+        color: black;
+    }
+
+    .links {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .links a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .links a:hover {
+        text-decoration: underline;
+    }
+    </style>
 </head>
 
 <body>
