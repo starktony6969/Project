@@ -187,6 +187,7 @@
         }
     }
 
+
     function validatePassword() {
         var passwordInput = document.getElementById("Password").value;
         var passwordError = document.getElementById("passwordError");

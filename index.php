@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-code.js"></script>
     <link rel="stylesheet" href="style/style.css">
     <style>
     .img {
@@ -167,6 +169,23 @@
         </div>
 
     </div>
+    <script>
+    // Add JavaScript code here
+    const passwordInput = document.getElementById('Password');
+    const passwordToggle = document.querySelector('.password-toggle');
+
+    passwordToggle.addEventListener('click', function() {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordToggle.classList.remove('fa-eye');
+            passwordToggle.classList.add('fa-eye-slash'); // Change icon to show password
+        } else {
+            passwordInput.type = 'password';
+            passwordToggle.classList.remove('fa-eye-slash');
+            passwordToggle.classList.add('fa-eye'); // Change icon to hide password
+        }
+    });
+    </script>
 </body>
 
 </html>

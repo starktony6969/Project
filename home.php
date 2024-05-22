@@ -49,11 +49,12 @@
         color: #fff;
     }
 
-    .content button {
+    button {
         font-size: clamp(0.9rem, 4vw, 1rem);
         font-weight: 600;
         padding: 8px 14px;
-        border-radius: 7px;
+        border: 2px solid black;
+        border-radius: 9px;
     }
 
     .swiper {
@@ -86,6 +87,11 @@
     .overlay h1 {
         font-size: clamp(1.2rem, 4vw, 1.5rem);
         font-weight: 600;
+    }
+
+    a:hover {
+        color: black;
+
     }
     </style>
 </head>
