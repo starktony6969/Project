@@ -63,6 +63,7 @@
                 <input type="date" name="ending_date" id="ending_date" class="form-control" />
                 <span class="text-danger"><?php echo isset($ending_date_err) ? $ending_date_err : ''; ?></span>
             </div>
+            <br>
             <input type="submit" value="Add Election" name="addElectionBtn" class="btn btn-success" /><br>
         </form>
 

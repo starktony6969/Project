@@ -61,17 +61,28 @@
                 if (isset($_POST['submit'])) {
                     $Name = $_POST['Name'];
                     $Contact = $_POST['Contact'];
-                    $Registration_No = $_POST['Registration_No']; // Ensure this matches your HTML form and database column
+                    $Registration_No = $_POST['Registration_No'];
                     $Password = $_POST['Password'];
                     $retypepassword = $_POST['retypepassword'];
 
                     if ($Password === $retypepassword) {
-                        // SQL to prevent SQL Injection
-                        $stmt = $db->prepare("INSERT INTO users(Name, Contact, Registration_No, Password) VALUES(?, ?, ?, ?)");
-                        $stmt->bind_param("ssss", $Name, $Contact, $Registration_No, $Password);
-                        $stmt->execute();
+                        // Check if the registration number already exists
+                        $query = "SELECT COUNT(*) AS count FROM users WHERE Registration_No='$Registration_No'";
+                        $result = mysqli_query($db, $query);
+                        $row = mysqli_fetch_assoc($result);
 
-                        $message = "Registration successful!";
+                        if ($row['count'] > 0) {
+                            $message = "Registration number already exists.";
+                        } else {
+                            // Insert the new user record
+                            $query = "INSERT INTO users (Name, Contact, Registration_No, Password) 
+                                      VALUES ('$Name', '$Contact', '$Registration_No', '$Password')";
+                            if (mysqli_query($db, $query)) {
+                                $message = "Registration successful!";
+                            } else {
+                                $message = "Error: " . mysqli_error($db);
+                            }
+                        }
                     } else {
                         $message = "Passwords do not match.";
                     }

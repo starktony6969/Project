@@ -29,37 +29,6 @@ if (isset($_GET['id'])) {
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/bootstrap.min.js"></script>
 
-<?php 
-    if(isset($_GET['added']))
-    {
-?>
-<div class="alert alert-success my-3" role="alert">
-    Candidate has been added successfully.
-</div>
-<?php 
-    }else if(isset($_GET['largeFile'])) {
-?>
-<div class="alert alert-danger my-3" role="alert">
-    Candidate image is too large, please upload small file (you can upload any image upto 2mbs.).
-</div>
-<?php
-    }else if(isset($_GET['invalidFile']))
-    {
-?>
-<div class="alert alert-danger my-3" role="alert">
-    Invalid image type (Only .jpg, .png files are allowed) .
-</div>
-<?php
-    }else if(isset($_GET['failed']))
-    {
-?>
-<div class="alert alert-danger my-3" role="alert">
-    Image uploading failed, please try again.
-</div>
-<?php
-    }
-
-?>
 <div class="row my-3 p-4">
     <div class="col-md-6">
         <h3>Edit Candidates</h3>
